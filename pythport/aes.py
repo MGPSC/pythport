@@ -1,24 +1,23 @@
 # Implementation of the two-way encrypt/decrypt algos
-from base64 import b64encode
+from base64 import b64encode, b64decode
 from Crypto.Hash import SHA256
 from Crypto import Random
 from Crypto.Cipher import AES
-from Crypto.Protocol.KDF import bcrypt
+# from Crypto.Protocol.KDF import bcrypt
 
-# hash = SHA256.new()
-class bcrypt_encrypt():
-    def __init__(self, password):
-        self.pass_scheme = b64encode(SHA256.new(password).digest())
-
-    def cook_hash(self):
-        
-
-class aes_encrypt():
+class AesEncrypt():
     def __init__(self, key):
         self.block_size = AES.block_size
-        self.key = 
+        self.key = SHA256.new(key.encode()).digest()
         
-    def some_stuff():
+    def _pad(self, text):
+        required_bytes = self.block_size - len(text) % self.block_size
+        ascii_str = chr(required_bytes)
+        padding = ascii_str * required_bytes
+        padded_text = text + padding
+        return padded_text
+
+    def some_stuff(self):
         key = b"Pythport is cool"
         iv = Random.new().read(self.block_size)
         cipher = AES.new(key, AES.MODE_CFB, iv)
@@ -30,12 +29,7 @@ class aes_encrypt():
 # Create a new AES cipher
 # new_cipher(key, *args, **kwargs)
 
+AES = AesEncrypt("h")
 
-def request_password():
-    password = input("Please enter your password: \n> ")
-    if password == hashed:
-        print("success")
-        return
-    print("FAIL")
+print(len(AES._pad("woohoo")))
 
-request_password()
