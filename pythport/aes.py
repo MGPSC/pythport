@@ -7,6 +7,11 @@ import sys
 # from Crypto.Protocol.KDF import bcrypt
 
 class AesEncrypt():
+    """
+    Instantiate using AesEncrypt(password).\n
+    AesEncrypt.encrypt(plain_text) -> returns encrypted string version of provided text\n
+    AesEncrypt.decrypt(encrypted_text) -> returns decrypted version of provided encrypted text, provided that instance was given correct password on instantiation.
+    """
     def __init__(self, key):
         self.block_size = AES.block_size
         self.key = SHA256.new(key.encode()).digest()
@@ -37,22 +42,3 @@ class AesEncrypt():
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         plain_text = cipher.decrypt(encrypted_text[self.block_size:]).decode("UTF-8")
         return self.__unpad(plain_text)
-
-
-# print(dir(hash))
-
-# print(hash.hexdigest())
-# Create a new AES cipher
-# new_cipher(key, *args, **kwargs)
-
-aes = AesEncrypt("password123")
-
-encrypty = aes.encrypt("hello-world!")
-
-print(encrypty)
-
-aes = AesEncrypt("password123")
-
-decrypty = aes.decrypt(encrypty)
-
-print(decrypty)

@@ -5,7 +5,7 @@ import sys
 
 class BcryptEncrypt():
     """
-    bcrypt_encrypt(password) -> takes in user password, inserts password to encryption scheme. To return hashed password, use .cook_hash().
+    BcryptEncrypt(password) -> Instantiates bcrypt encryption object. Takes in user password, inserts password to encryption scheme. To return hashed password, use .cook_hash().
     """
     def __init__(self, password):
         self.pass_scheme = b64encode(SHA256.new(password.encode()).digest())
