@@ -1,5 +1,5 @@
 from pythport import __version__
-from pythport.bcrypt import Bcrypt_Encrypt
+from pythport.bcrypt import BcryptEncrypt
 import pytest
 
 def test_version():
@@ -7,9 +7,9 @@ def test_version():
 
 
 def test_bcrypt_returns_hash_len_60():
-    a = Bcrypt_Encrypt('spam')
-    b = Bcrypt_Encrypt('SpamAndEggs')
-    c = Bcrypt_Encrypt('hi')
+    a = BcryptEncrypt('spam')
+    b = BcryptEncrypt('SpamAndEggs')
+    c = BcryptEncrypt('hi')
     assert len(a.cook_hash()) == 60
     assert len(b.cook_hash()) == 60
     assert len(c.cook_hash()) == 60

@@ -1,0 +1,10 @@
+{
+    "saved": [
+        {
+            "name": "name_here",
+            "url": "url_here",
+            "username":"username_here",
+            "password": "encrypted_pwd_here"
+        }
+    ]
+}
