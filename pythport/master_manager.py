@@ -23,7 +23,6 @@ class MasterManager():
     def validate_master_pwd(self, attempt):
         master_hash = self.master_dict["master"]["hash"].encode()
         validated = BcryptEncrypt.validate_pwd(attempt, master_hash)
-        print("Validated:", validated)
 
 
 if __name__ == "__main__":
