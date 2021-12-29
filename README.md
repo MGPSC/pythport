@@ -28,4 +28,4 @@
 ## Attributions
 
 [PyCryptodome Docs](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html)
-[Quick Code: AES implementationin Python](https://medium.com/quick-code/aes-implementation-in-python-a82f582f51c2)
+[Quick Code: AES implementation in Python](https://medium.com/quick-code/aes-implementation-in-python-a82f582f51c2)

@@ -8,9 +8,10 @@ import sys
 
 class AesEncrypt():
     """
-    Instantiate using AesEncrypt(password).\n
-    AesEncrypt.encrypt(plain_text) -> returns encrypted string version of provided text\n
-    AesEncrypt.decrypt(encrypted_text) -> returns decrypted version of provided encrypted text, provided that instance was given correct password on instantiation.
+    Instantiate using AesEncrypt(password).
+    #### METHODS
+    - `.encrypt(plain_text)` - returns encrypted string version of provided text
+    - `.decrypt(encrypted_text)` - returns decrypted version of provided encrypted text, provided that instance was given correct password on instantiation.
     """
     def __init__(self, key):
         self.block_size = AES.block_size
