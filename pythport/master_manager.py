@@ -18,7 +18,7 @@ class MasterManager():
         hash = bc.cook_hash()
         self.master_dict["master"]["hash"] = hash.decode()
         with open('assets/master.json', "w") as f:
-            f.write(json.dumps(self.master_dict))
+            f.write(json.dumps(self.master_dict, indent = 4))
 
     def validate_master_pwd(self, attempt):
         master_hash = self.master_dict["master"]["hash"].encode()
