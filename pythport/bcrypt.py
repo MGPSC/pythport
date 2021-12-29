@@ -5,9 +5,10 @@ import sys
 
 class BcryptEncrypt():
     """
-    BcryptEncrypt(password) -> Instantiates bcrypt encryption object. Takes in user password, inserts password to encryption scheme. 
-    - .cook_hash() - takes in a string and returns a hash.
-    - .validate_pwd() - takes in a string and stored hash, compares against algorithm, returns boolean.
+    BcryptEncrypt(password) -> Instantiates bcrypt encryption object. Takes in user password, inserts password to encryption scheme.
+    #### METHODS
+    - `.cook_hash()` - takes in a string and returns a hash.
+    - `.validate_pwd(attempt_str, bcrypt_hash)` - takes in a string and stored hash, compares against algorithm, returns boolean.
     
     """
     def __init__(self, password):
