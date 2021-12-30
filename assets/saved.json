@@ -1,14 +1,20 @@
-[
-    {
+{
+    "name_here": {
         "name": "name_here",
         "url": "url_here",
-        "username":"username_here",
+        "username": "encrypted_username_here",
         "password": "encrypted_pwd_here"
     },
-    {
+    "name2_here": {
         "name": "name2_here",
         "url": "url2_here",
-        "username":"username2_here",
+        "username": "encrypted_username2_here",
         "password": "encrypted_pwd2_here"
+    },
+    "blah": {
+        "name": "blah",
+        "url": "www.blah.com",
+        "username": "oJYF5m0qFtsCIvWyhXrPXFHf1P1JeHPBEaGBthjrBR4=",
+        "password": "VfaTJqi8JaN7B4nuOrOmffvwieCM4/VHjZm6yxvFgDM="
     }
-]
+}
