@@ -3,18 +3,21 @@
         "name": "name_here",
         "url": "url_here",
         "username": "encrypted_username_here",
-        "password": "encrypted_pwd_here"
+        "password": "encrypted_pwd_here",
+        "show": true
     },
     "name2_here": {
         "name": "name2_here",
         "url": "url2_here",
         "username": "encrypted_username2_here",
-        "password": "encrypted_pwd2_here"
+        "password": "encrypted_pwd2_here",
+        "show": false
     },
     "blah": {
         "name": "blah",
         "url": "www.blah.com",
         "username": "oJYF5m0qFtsCIvWyhXrPXFHf1P1JeHPBEaGBthjrBR4=",
-        "password": "VfaTJqi8JaN7B4nuOrOmffvwieCM4/VHjZm6yxvFgDM="
+        "password": "VfaTJqi8JaN7B4nuOrOmffvwieCM4/VHjZm6yxvFgDM=",
+        "show": false
     }
 }

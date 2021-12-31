@@ -46,9 +46,11 @@ class PassManager():
         return self.saved_logs[name]
 
 
-new = [{'name': 'blah', 'url': 'www.blah.com', 'username': 'bb@email.com', "password": "123abc", "show":"True"}]
+if __name__ == "__main__":
 
-my_passes = PassManager("potato123")
+    new = [{'name': 'blah', 'url': 'www.blah.com', 'username': 'bb@email.com', "password": "123abc", "show":"True"}]
 
-print("decrypted version:", my_passes.get_decrypted("blah"))
-print("encrypted version:", my_passes.get_encrypted("blah"))
+    my_passes = PassManager("potato123")
+
+    print("decrypted version:", my_passes.get_decrypted("blah"))
+    print("encrypted version:", my_passes.get_encrypted("blah"))

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+# from pythport.main import PythPortMain
 
 #poetry env 3.9.5
 #pyenv shell --unset
@@ -34,7 +35,9 @@ class LoginPage():
             messagebox.showerror(title="Oops!", message="Your password must contain at least eight (8) characters. Please enter a longer password.")
 
     def login(self):
-        pass
+        self.set_main_pm(self.pw_entry.get())
+        self.clear_all(self.root)
+        self.show_landing_page()
 
     @staticmethod
     def clear_all(element):
