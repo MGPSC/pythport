@@ -138,6 +138,17 @@ class LandingPage(tk.Frame):
         self.pw_entry = tk.StringVar()
         # self.content = ttk.Frame(self.root)
 
+    def toggle_hide(self):
+            
+    #     current = tv.focus()
+    #     if current and self.hide == True: 
+    #        self.hide = False
+    #        return self.render_tree(self.master.pm.get_decrypted(tv.item(current["name"])))
+    #     elif current and self.hide == False:
+    #        self.hide = True
+    #        return self.render_tree(pm.get_encrypt(NAME_OF_HIGHLIGHTED))
+            pass
+
     def render_self(self):
         self.grid(column = 0, row = 0, columnspan = 4, rowspan = 4, padx=(50, 50), pady=(10, 50))
         tv = ttk.Treeview(self)
@@ -174,12 +185,116 @@ class LandingPage(tk.Frame):
         self.grid_columnconfigure(0, weight = 1)
         tv.grid(column = 0, row = 1)
 
+#      BUTTONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+        add_new_btn = ttk.Button(self, text="Add New", command = lambda: self.main.switch_frame(AddNewLogin))
+        add_new_btn.grid(column=3, row=0)
+
+
+        show_hide_btn = ttk.Button(self, text="Show/Hide", command = self.toggle_hide()) 
+        show_hide_btn.grid(column=3, row=1)
+
+
+                
+        
+    
+    
 class AddNewLogin(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        
+        self.main = master
+        self.new_name = tk.StringVar()
+        self.new_url = tk.StringVar()
+        self.new_username = tk.StringVar()
+        self.new_pwd = tk.StringVar()
 
+    def handle_save(self):
+        self.main.switch_frame(LandingPage)
+
+    def render_self(self):
+        self.grid(column = 0, row = 0)
+
+        title_label = ttk.Label(self, text = "Create New Login")
+
+        name_label = ttk.Label(self, text = "Site:", justify="right")
+        name_entry = ttk.Entry(self, textvariable=self.new_name)
+        url_label = ttk.Label(self, text = "URL:", justify="right")
+        url_entry = ttk.Entry(self, textvariable=self.new_url)
+        username_label = ttk.Label(self, text = "Username:", justify="right")
+        username_entry = ttk.Entry(self, textvariable=self.new_username)
+        pwd_label = ttk.Label(self, text = "Password:", justify="right")
+        pwd_entry = ttk.Entry(self, textvariable=self.new_pwd)
+
+        create_btn = ttk.Button(self, text="Save", command=self.handle_save)
+        cancel_btn = ttk.Button(self, text="Cancel", command = lambda: self.main.switch_frame(LandingPage))
+
+        #TODO: Come back and fix this grid, man
+        title_label.grid(column=0, row=0, columnspan=5)
+
+        name_label.grid(column=1, row=1, columnspan=2)
+        name_entry.grid(column=3, row=1, columnspan=3)
+        url_label.grid(column=1, row=2, columnspan=2)
+        url_entry.grid(column=3, row=2, columnspan=3)
+        username_label.grid(column=1, row=3, columnspan=2)
+        username_entry.grid(column=3, row=3, columnspan=3)
+        pwd_label.grid(column=1, row=4, columnspan=2)
+        pwd_entry.grid(column=3, row=4, columnspan=3)
+
+        create_btn.grid(column = 3, row=5, pady=(20,20))
+        cancel_btn.grid(column=4, row=5, pady=(20,20))
+
+
+
+
+class GenPassword(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+    
+# function to generate password based on input of how many digits for password    
+    def new_pass():
+# create an empty box
+        pw_entry.delete(0, tk.END)
+
+# get length and covert to int
+
+        pw_length = int(my_entry.get())
+
+        my_pass = ''
+# the reason the randint is 22-126 is because that is the range of ASCII keys that are printable and/or usable as a password
+
+        for i in range (pw_length):
+            my_pass += chr(randint(33,126))
+
+        pw_entry.insert(0, my_pass)
+
+
+# def clipb():
+#     root.clipboard_clear()
+#     root.clipboard_append(pw_entry.get())
+#     print(pw_entry.get())
+
+# # Frame Creation
+# lf = tk.LabelFrame(self, text="How Many Characters?")
+# lf.pack(pady=20)
+
+# # how many characters would you like per password
+# my_entry = tk.Entry(lf, font=("Helvetica", 24))
+# my_entry.pack(pady=20, padx=20)
+
+# # Create Entry Box For Our Returned Password
+# pw_entry = tk.Entry(self, text='', font=("Helvetica", 24), bd=0, bg="#fefefe")
+# pw_entry.pack(pady=20)
+
+# # Framing
+# my_frame = tk.Frame(root)
+# my_frame.pack(pady=20)
+
+# # Buttons
+# my_button = tk.Button(self, text= "Generate New Password", command= new_pass)
+# my_button.grid(row=0, column=1, padx=10)
+
+# clip_button = tk.Button(self, text="Copy To Clipboard", command= clipb)
+# clip_button.grid(row=1, column=1, padx=20)
 
 
 
@@ -190,14 +305,5 @@ app.mainloop()
 
 # add_new_btn = ttk.Button(self, text"Add New", command = self'holder for new account page')
 
-# show_hide_btn = ttk.Button(self, text="Show/Hide", command = toggle_hide()) NEED a toggle True/False 
+# pass_gen_btn = ttk.Button(self, text"Generate Random Password", command = self'holder for generate password page')
 
-# def toggle_hide(self):
-#   if 
-#   if self.hide == True:
-        # self.hide = False
-            # return render_tree(pm.get_decrypted(NAME_OF_HIGHLIGHTED))
-            #
-#   elif self.hide == False:
-        # self.hide = True
-        # return render_tree(pm.get_encrypt(NAME_OF_HIGHLIGHTED))
