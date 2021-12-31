@@ -209,7 +209,9 @@ class AddNewLogin(tk.Frame):
         self.new_pwd = tk.StringVar()
 
     def handle_save(self):
-        self.main.switch_frame(LandingPage)
+        #wire up to pm object and add new entry based on state at submit
+        #then go back to landing
+        pass
 
     def render_self(self):
         self.grid(column = 0, row = 0)
@@ -245,7 +247,7 @@ class AddNewLogin(tk.Frame):
 
 
 
-
+# need to weave in genpassword class, some updates to syntax have been done
 class GenPassword(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
