@@ -22,14 +22,8 @@ class MasterManager():
 
     def validate_master_pwd(self, attempt):
         master_hash = self.master_dict["master"]["hash"].encode()
-        try:
-            BcryptEncrypt.validate_pwd(attempt, master_hash)
-            return True
-            #raises ValueError if fails, nothing if pass
-        except ValueError:
-            print("incorrect password")
-            return False
-        
+        return BcryptEncrypt.validate_pwd(attempt, master_hash)
+ 
 
 
 
