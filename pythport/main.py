@@ -8,7 +8,7 @@ from random import randint
 
 # from pythport.login_screen import LoginPage
 # from pythport.landing_page import LandingPage
- 
+
 #####
 ## MAIN LOGIC
 #####
@@ -79,7 +79,11 @@ class LoginPage(tk.Frame):
             messagebox.showerror(title="Oops!", message="Your password must contain at least eight (8) characters. Please enter a longer password.")
 
     def login(self):
-        self.main.switch_frame(LandingPage)
+        password = self.pw_entry.get()
+        if self.main.mm.validate_master_pwd(password):
+            self.main.switch_frame(LandingPage)
+        else:
+            messagebox.showerror(title="Incorrect Password", message="Incorrect password!\nPlease try again!")
 
     # @staticmethod
     # def clear_all(element):
@@ -128,6 +132,7 @@ class LandingPage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.main = master
+        self.hide = True
         # self.root = root
         # self.pm = pm
         self.pw_entry = tk.StringVar()
@@ -164,11 +169,35 @@ class LandingPage(tk.Frame):
         # label = tk.Label(self, text="This is page 2")
         # label.pack(side="top", fill="both", expand=True)
 
-
         self.Treeview = tv
         self.grid_rowconfigure(0, weight = 1)
         self.grid_columnconfigure(0, weight = 1)
-        tv.grid(column = 0, row = 0)
+        tv.grid(column = 0, row = 1)
+
+
+class AddNewLogin(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        
+
+
+
 
 app = PythPortMain()
 app.mainloop()
+
+# update_btn = ttk.Button(self, text="Update/Remove", command = self'holder for update page')
+
+# add_new_btn = ttk.Button(self, text"Add New", command = self'holder for new account page')
+
+# show_hide_btn = ttk.Button(self, text="Show/Hide", command = toggle_hide()) NEED a toggle True/False 
+
+# def toggle_hide(self):
+#   if 
+#   if self.hide == True:
+        # self.hide = False
+            # return render_tree(pm.get_decrypted(NAME_OF_HIGHLIGHTED))
+            #
+#   elif self.hide == False:
+        # self.hide = True
+        # return render_tree(pm.get_encrypt(NAME_OF_HIGHLIGHTED))
