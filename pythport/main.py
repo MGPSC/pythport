@@ -16,6 +16,7 @@ from random import randint
 class PythPortMain(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
+        self.geometry('800x300')
         self.window = None
         self.mm = MasterManager()
         # self.root = tk.Tk()
@@ -194,11 +195,12 @@ class LandingPage(tk.Frame):
         show_hide_btn = ttk.Button(self, text="Show/Hide", command = self.toggle_hide()) 
         show_hide_btn.grid(column=3, row=1)
 
+        pass_gen_btn = ttk.Button(self, text="Generate Random Password", command = lambda: self.main.switch_frame(GenPassword))
+        pass_gen_btn.grid(column=3, row= 2)
 
-                
+        update_btn = ttk.Button(self, text="Update/Remove", command = lambda: self.main.switch_frame(UpdateRemove))
+        update_btn.grid(column=3, row= 2)
         
-    
-    
 class AddNewLogin(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
@@ -218,13 +220,13 @@ class AddNewLogin(tk.Frame):
 
         title_label = ttk.Label(self, text = "Create New Login")
 
-        name_label = ttk.Label(self, text = "Site:", justify="right")
+        name_label = ttk.Label(self, text = "Site:")
         name_entry = ttk.Entry(self, textvariable=self.new_name)
-        url_label = ttk.Label(self, text = "URL:", justify="right")
+        url_label = ttk.Label(self, text = "URL:")
         url_entry = ttk.Entry(self, textvariable=self.new_url)
-        username_label = ttk.Label(self, text = "Username:", justify="right")
+        username_label = ttk.Label(self, text = "Username:")
         username_entry = ttk.Entry(self, textvariable=self.new_username)
-        pwd_label = ttk.Label(self, text = "Password:", justify="right")
+        pwd_label = ttk.Label(self, text = "Password:")
         pwd_entry = ttk.Entry(self, textvariable=self.new_pwd)
 
         create_btn = ttk.Button(self, text="Save", command=self.handle_save)
@@ -246,66 +248,120 @@ class AddNewLogin(tk.Frame):
         cancel_btn.grid(column=4, row=5, pady=(20,20))
 
 
+class UpdateRemove(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.main = master
+        self.new_name = tk.StringVar()
+        self.new_url = tk.StringVar()
+        self.new_username = tk.StringVar()
+        self.new_pwd = tk.StringVar()
 
-# need to weave in genpassword class, some updates to syntax have been done
+
+    def render_self(self):
+
+        self.grid(columnspan=5)
+
+        #components
+        title = ttk.Label(self, text="Update Login Information")
+
+        name = ttk.Label(self, text="Site Name")
+
+        url_label = ttk.Label(self, text = "URL:")
+        current_url_label = ttk.Label(self, text = "Current URL")
+        new_url_entry = ttk.Entry(self, textvariable=self.new_url)
+        
+        username_label = ttk.Label(self, text = "Username:")
+        current_username_label = ttk.Label(self, text = "Current Username")
+        new_username_entry = ttk.Entry(self, textvariable=self.new_username)
+
+        pwd_label = ttk.Label(self, text = "Password:")
+        current_pwd_label = ttk.Label(self, text = "Current Password")
+        new_pwd_entry = ttk.Entry(self, textvariable=self.new_pwd)
+
+        save_btn = ttk.Button(self, text="Save")
+        cancel_btn = ttk.Button(self, text="Cancel", command=lambda:self.main.switch_frame(LandingPage))
+        delete_btn = ttk.Button(self, text="Delete")
+
+        #positions
+        title.grid(row=0, column=0, columnspan=3)
+
+        name.grid(row=1, column=0, columnspan=3, pady=5)
+
+        url_label.grid(row=2, column=1)
+        current_url_label.grid(row=2, column=2, columnspan=2)
+        new_url_entry.grid(row=3, column=2, columnspan=2)
+
+        username_label.grid(row=4, column=1)
+        current_username_label.grid(row=4, column=2, columnspan=2)
+        new_username_entry.grid(row=5, column=2, columnspan=2)
+
+        pwd_label.grid(row=6, column=1)
+        current_pwd_label.grid(row=6, column=2, columnspan=2)
+        new_pwd_entry.grid(row=7, column=2, columnspan=2)
+
+        delete_btn.grid(row=8, column=1)
+        save_btn.grid(row=8, column=2, padx=(30,3))
+        cancel_btn.grid(row=8, column=3)
+
+        # self.grid_rowconfigure(0, weight=1)
+        # self.grid_rowconfigure(9, weight=1)
+        # self.grid_columnconfigure(0, weight=1)
+        # self.grid_columnconfigure(4, weight=1)
+
+
 class GenPassword(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
     
-# function to generate password based on input of how many digits for password    
-    def new_pass():
-# create an empty box
-        pw_entry.delete(0, tk.END)
 
-# get length and covert to int
+    def render_self(self):    
+        
+        self.pack()
 
-        pw_length = int(my_entry.get())
-
-        my_pass = ''
-# the reason the randint is 22-126 is because that is the range of ASCII keys that are printable and/or usable as a password
-
-        for i in range (pw_length):
-            my_pass += chr(randint(33,126))
-
-        pw_entry.insert(0, my_pass)
+        def new_pass():
+            pw_entry.delete(0, tk.END)
+            pw_length = int(my_entry.get())
+            my_pass = ''
+      # the reason the randint is 33-126 is because that is the range of ASCII keys that are printable and/or usable as a password
+            for i in range (pw_length):
+                my_pass += chr(randint(33,126))
+            pw_entry.insert(0, my_pass)
 
 
-# def clipb():
-#     root.clipboard_clear()
-#     root.clipboard_append(pw_entry.get())
-#     print(pw_entry.get())
+        def clipb():
+            self.clipboard_clear()
+            self.clipboard_append(pw_entry.get())
+            print(pw_entry.get())
 
-# # Frame Creation
-# lf = tk.LabelFrame(self, text="How Many Characters?")
-# lf.pack(pady=20)
+        lf = tk.LabelFrame(self, text="How Many Characters?")
+        lf.pack(pady=20)
 
-# # how many characters would you like per password
-# my_entry = tk.Entry(lf, font=("Helvetica", 24))
-# my_entry.pack(pady=20, padx=20)
+        my_entry = tk.Entry(lf, font=("Helvetica", 24))
+        my_entry.pack(pady=20, padx=20)
 
-# # Create Entry Box For Our Returned Password
-# pw_entry = tk.Entry(self, text='', font=("Helvetica", 24), bd=0, bg="#fefefe")
-# pw_entry.pack(pady=20)
+        pw_entry = tk.Entry(self, text='', font=("Helvetica", 24), bd=0, bg="#000000")
+        pw_entry.pack(pady=20)
 
-# # Framing
-# my_frame = tk.Frame(root)
-# my_frame.pack(pady=20)
+        my_frame = tk.Frame(self)
+        my_frame.pack(pady=20)
 
-# # Buttons
-# my_button = tk.Button(self, text= "Generate New Password", command= new_pass)
-# my_button.grid(row=0, column=1, padx=10)
+        my_button = tk.Button(self, text= "Generate New Password", command= new_pass)
+        my_button.pack(padx=10, pady=10)
 
-# clip_button = tk.Button(self, text="Copy To Clipboard", command= clipb)
-# clip_button.grid(row=1, column=1, padx=20)
+        back_button = tk.Button(self, text= "Back", command = lambda: self.master.switch_frame(LandingPage))
+        back_button.pack(padx= 30, pady= 10)
+        ### TODO: Add back button to return to landing page
+
+
+        clip_button = tk.Button(self, text="Copy To Clipboard", command= clipb)
+        clip_button.pack(padx=20, pady=10)
 
 
 
 app = PythPortMain()
+PythPortMain
 app.mainloop()
 
-# update_btn = ttk.Button(self, text="Update/Remove", command = self'holder for update page')
 
-# add_new_btn = ttk.Button(self, text"Add New", command = self'holder for new account page')
-
-# pass_gen_btn = ttk.Button(self, text"Generate Random Password", command = self'holder for generate password page')
 
