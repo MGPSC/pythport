@@ -264,18 +264,25 @@ class UpdateRemove(tk.Frame):
         tk.Frame.__init__(self, master)
         self.main = master
         self.login = self.main.pm.get_decrypted(self.main.tree_selection[0])
-        self.new_name = tk.StringVar()
         self.new_url = tk.StringVar()
         self.new_username = tk.StringVar()
         self.new_pwd = tk.StringVar()
 
     def delete_login(self):
-        self.main.pm.delete_entry(self.login["name"])
-        self.main.switch_frame(LandingPage)
-
+        name = self.login["name"]
+        #TODO:Find way to integrate John Cena
+        warn_response = messagebox.askquestion("Delete Login Requested", f"Are you sure you want to delete your login for {name}? Login information for this entry will be permanently deleted!", icon='warning')
+        if warn_response == 'yes':
+            self.main.pm.delete_entry(self.login["name"])
+            self.main.switch_frame(LandingPage)
+            
     def update_login(self):
-        pass
-
+        name = self.login["name"]
+        updated = [{'name': self.login["name"], 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_username.get()}]
+        self.main.pm.create_login(updated)
+        messagebox.showinfo("Login Updated", f"Login information for {name} updated!")
+        self.main.switch_frame(LandingPage)
+        
     def render_self(self):
         print(self.main.tree_selection)
         print(self.login)
@@ -301,9 +308,9 @@ class UpdateRemove(tk.Frame):
         new_pwd_entry = ttk.Entry(self, textvariable=self.new_pwd, show="*")
         new_pwd_entry.insert(0, self.login['password'])
 
-        save_btn = ttk.Button(self, text="Save")
+        save_btn = ttk.Button(self, text="Update", command=self.update_login)
         cancel_btn = ttk.Button(self, text="Cancel", command=lambda:self.main.switch_frame(LandingPage))
-        delete_btn = ttk.Button(self, text="Delete")
+        delete_btn = ttk.Button(self, text="Delete", command=self.delete_login)
 
         #positions
         title.grid(row=0, column=0, columnspan=3)
