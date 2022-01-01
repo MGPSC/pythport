@@ -27,4 +27,3 @@ class BcryptEncrypt():
         except ValueError:
             print("Invalid Password!")
             return False
-            # possibly call login function again

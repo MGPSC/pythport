@@ -22,19 +22,9 @@ class MasterManager():
 
     def validate_master_pwd(self, attempt):
         master_hash = self.master_dict["master"]["hash"].encode()
-        validated = BcryptEncrypt.validate_pwd(attempt, master_hash)
+        return BcryptEncrypt.validate_pwd(attempt, master_hash)
+ 
 
 
-if __name__ == "__main__":
-    
-    pass_hash = MasterManager.master_dict["master"]["hash"]
 
-    if pass_hash is None:
-        ## ON FIRST RUN (no stored password)
-        passphrase = input("What would you like your password to be?\n> ")
-        MasterManager.create_master_hash(passphrase)
-    else:
-        ## ANY OTHER RUN
-        attempt = input("Please enter your password:\n> ")
-        MasterManager.validate_master_pwd(attempt)
         
