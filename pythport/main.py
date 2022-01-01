@@ -82,6 +82,7 @@ class LoginPage(tk.Frame):
     def login(self):
         password = self.pw_entry.get()
         if self.main.mm.validate_master_pwd(password):
+            self.main.pm = PassManager(password)
             self.main.switch_frame(LandingPage)
         else:
             messagebox.showerror(title="Incorrect Password", message="Incorrect password!\nPlease try again!")
@@ -139,16 +140,6 @@ class LandingPage(tk.Frame):
         self.pw_entry = tk.StringVar()
         # self.content = ttk.Frame(self.root)
 
-    def toggle_hide(self):
-            
-    #     current = tv.focus()
-    #     if current and self.hide == True: 
-    #        self.hide = False
-    #        return self.render_tree(self.master.pm.get_decrypted(tv.item(current["name"])))
-    #     elif current and self.hide == False:
-    #        self.hide = True
-    #        return self.render_tree(pm.get_encrypt(NAME_OF_HIGHLIGHTED))
-            pass
 
     def render_self(self):
         self.grid(column = 0, row = 0, columnspan = 4, rowspan = 4, padx=(50, 50), pady=(10, 50))
@@ -162,22 +153,35 @@ class LandingPage(tk.Frame):
         tv.column('Email', anchor='center', width=200)
         tv.heading('Password', text='Password')
         tv.column('Password', anchor='center', width=200)
-
+    
         def render_tree(tree):
-            with open("assets/saved.json", "r") as f:
-                raw_json = f.read()
-                pass_dict = json.loads(raw_json)
+            if tv.get_children():
+                for item in tv.get_children():
+                    tv.delete(item)
+
+            pass_dict = self.main.pm.retrieve_logins()
 
             for key in pass_dict:
-                login = pass_dict[key]
+                login = self.main.pm.get_decrypted(key)
                 info = list(login.values())
-                if info[4]:
-                    tree.insert('', 'end', values=info[:4])
-                else:
+                if self.hide == False:
+                    tree.insert('', 'end', values=info)
+                elif self.hide == True:
                     tree.insert('', 'end', values=info[:2] + ['*'*8, '*'*8])  
         render_tree(tv)
         tv['show'] = 'headings'
-        # tv.pack(side="top", fill="both", expand=True)
+     
+        def toggle_hide(tv):
+
+            if self.hide == True:
+                self.hide = False
+                render_tree(tv)
+            elif self.hide == False:
+                self.hide = True
+                render_tree(tv)    
+            
+                pass
+            # tv.pack(side="top", fill="both", expand=True)
         # label = tk.Label(self, text="This is page 2")
         # label.pack(side="top", fill="both", expand=True)
 
@@ -192,7 +196,7 @@ class LandingPage(tk.Frame):
         add_new_btn.grid(column=3, row=0)
 
 
-        show_hide_btn = ttk.Button(self, text="Show/Hide", command = self.toggle_hide()) 
+        show_hide_btn = ttk.Button(self, text="Show/Hide", command = lambda: toggle_hide(tv))
         show_hide_btn.grid(column=3, row=1)
 
         pass_gen_btn = ttk.Button(self, text="Generate Random Password", command = lambda: self.main.switch_frame(GenPassword))
@@ -213,7 +217,9 @@ class AddNewLogin(tk.Frame):
     def handle_save(self):
         #wire up to pm object and add new entry based on state at submit
         #then go back to landing
-        pass
+        new = [{'name': self.new_name.get(), 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_pwd.get()}]
+        self.main.pm.create_login(new)
+        self.main.switch_frame(LandingPage)
 
     def render_self(self):
         self.grid(column = 0, row = 0)
