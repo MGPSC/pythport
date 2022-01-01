@@ -38,6 +38,13 @@ class PassManager():
     def retrieve_logins(self):
         return self.saved_logs
 
+    def delete_entry(self, site_name):
+
+        del self.saved_logs[site_name]
+        
+        with open("assets/saved.json", "w") as f:
+            f.write(json.dumps(self.saved_logs, indent=4))
+
     def get_decrypted(self, name):
         requested = self.saved_logs[name].copy()
         requested['username'] = self.crypto.decrypt(requested['username'])
