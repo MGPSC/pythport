@@ -185,6 +185,11 @@ class LandingPage(tk.Frame):
         # label = tk.Label(self, text="This is page 2")
         # label.pack(side="top", fill="both", expand=True)
 
+        def go_to_update():
+            selected = tv.item(tv.focus())["values"]
+            self.main.tree_selection = selected
+            self.main.switch_frame(UpdateRemove)
+
         self.Treeview = tv
         self.grid_rowconfigure(0, weight = 1)
         self.grid_columnconfigure(0, weight = 1)
@@ -202,7 +207,7 @@ class LandingPage(tk.Frame):
         pass_gen_btn = ttk.Button(self, text="Generate Random Password", command = lambda: self.main.switch_frame(GenPassword))
         pass_gen_btn.grid(column=3, row= 2)
 
-        update_btn = ttk.Button(self, text="Update/Remove", command = lambda: self.main.switch_frame(UpdateRemove))
+        update_btn = ttk.Button(self, text="Update/Remove", command = go_to_update)
         update_btn.grid(column=3, row= 2)
         
 class AddNewLogin(tk.Frame):
@@ -258,32 +263,43 @@ class UpdateRemove(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.main = master
+        self.login = self.main.pm.get_decrypted(self.main.tree_selection[0])
         self.new_name = tk.StringVar()
         self.new_url = tk.StringVar()
         self.new_username = tk.StringVar()
         self.new_pwd = tk.StringVar()
 
+    def delete_login(self):
+        self.main.pm.delete_entry(self.login["name"])
+        self.main.switch_frame(LandingPage)
+
+    def update_login(self):
+        pass
 
     def render_self(self):
-
+        print(self.main.tree_selection)
+        print(self.login)
         self.grid(columnspan=5)
 
         #components
         title = ttk.Label(self, text="Update Login Information")
 
-        name = ttk.Label(self, text="Site Name")
+        name = ttk.Label(self, text=self.login["name"])
 
         url_label = ttk.Label(self, text = "URL:")
-        current_url_label = ttk.Label(self, text = "Current URL")
+        current_url_label = ttk.Label(self, text = self.login["url"])
         new_url_entry = ttk.Entry(self, textvariable=self.new_url)
+        new_url_entry.insert(0, self.login["url"])
         
         username_label = ttk.Label(self, text = "Username:")
-        current_username_label = ttk.Label(self, text = "Current Username")
+        current_username_label = ttk.Label(self, text = self.login["username"])
         new_username_entry = ttk.Entry(self, textvariable=self.new_username)
+        new_username_entry.insert(0, self.login["username"])
 
         pwd_label = ttk.Label(self, text = "Password:")
-        current_pwd_label = ttk.Label(self, text = "Current Password")
-        new_pwd_entry = ttk.Entry(self, textvariable=self.new_pwd)
+        current_pwd_label = ttk.Label(self, text = self.login['password'])
+        new_pwd_entry = ttk.Entry(self, textvariable=self.new_pwd, show="*")
+        new_pwd_entry.insert(0, self.login['password'])
 
         save_btn = ttk.Button(self, text="Save")
         cancel_btn = ttk.Button(self, text="Cancel", command=lambda:self.main.switch_frame(LandingPage))

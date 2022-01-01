@@ -3,15 +3,13 @@
         "name": "blah",
         "url": "www.blah.com",
         "username": "oJYF5m0qFtsCIvWyhXrPXFHf1P1JeHPBEaGBthjrBR4=",
-        "password": "VfaTJqi8JaN7B4nuOrOmffvwieCM4/VHjZm6yxvFgDM=",
-        "show": false
+        "password": "VfaTJqi8JaN7B4nuOrOmffvwieCM4/VHjZm6yxvFgDM="
     },
     "spam": {
         "name": "spam",
         "url": "www.spam.com",
         "username": "KE9vV6SdgsajMbkCFf+9Amo2Tt2+Jjrhm4tQdHVhDX4=",
-        "password": "ZmKBoQqppWmjqVgckBS7G9noUfm0B0l6w4RBfxZof8Y=",
-        "show": "True"
+        "password": "ZmKBoQqppWmjqVgckBS7G9noUfm0B0l6w4RBfxZof8Y="
     },
     "medium": {
         "name": "medium",
