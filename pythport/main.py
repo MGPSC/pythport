@@ -16,7 +16,7 @@ from random import randint
 class PythPortMain(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.geometry('800x300')
+        # self.geometry('800x300')
         self.window = None
         self.mm = MasterManager()
         # self.root = tk.Tk()
@@ -186,29 +186,32 @@ class LandingPage(tk.Frame):
         # label.pack(side="top", fill="both", expand=True)
 
         def go_to_update():
-            selected = tv.item(tv.focus())["values"]
-            self.main.tree_selection = selected
-            self.main.switch_frame(UpdateRemove)
+            try:
+                selected = tv.item(tv.focus())["values"]
+                self.main.tree_selection = selected
+                self.main.switch_frame(UpdateRemove)
+            except IndexError:
+                messagebox.showerror("No entry selected!", "Please select a login from the list to update/remove.")
 
         self.Treeview = tv
-        self.grid_rowconfigure(0, weight = 1)
-        self.grid_columnconfigure(0, weight = 1)
-        tv.grid(column = 0, row = 1)
+        # self.grid_rowconfigure(0, weight = 1)
+        # self.grid_columnconfigure(0, weight = 1)
+        tv.grid(column = 0, row = 1, columnspan=4)
 
 #      BUTTONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         add_new_btn = ttk.Button(self, text="Add New", command = lambda: self.main.switch_frame(AddNewLogin))
-        add_new_btn.grid(column=3, row=0)
+        add_new_btn.grid(column=0, row=0)
 
 
         show_hide_btn = ttk.Button(self, text="Show/Hide", command = lambda: toggle_hide(tv))
-        show_hide_btn.grid(column=3, row=1)
+        show_hide_btn.grid(column=1, row=0)
 
         pass_gen_btn = ttk.Button(self, text="Generate Random Password", command = lambda: self.main.switch_frame(GenPassword))
-        pass_gen_btn.grid(column=3, row= 2)
+        pass_gen_btn.grid(column=2, row= 0)
 
         update_btn = ttk.Button(self, text="Update/Remove", command = go_to_update)
-        update_btn.grid(column=3, row= 2)
+        update_btn.grid(column=3, row= 0)
         
 class AddNewLogin(tk.Frame):
     def __init__(self, master):
@@ -338,12 +341,10 @@ class UpdateRemove(tk.Frame):
         # self.grid_columnconfigure(0, weight=1)
         # self.grid_columnconfigure(4, weight=1)
 
-
 class GenPassword(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
     
-
     def render_self(self):    
         
         self.pack()
@@ -387,9 +388,8 @@ class GenPassword(tk.Frame):
         clip_button.pack(padx=20, pady=10)
 
 
-
 app = PythPortMain()
-PythPortMain
+app.eval('tk::PlaceWindow . center')
 app.mainloop()
 
 
