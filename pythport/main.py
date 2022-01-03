@@ -56,7 +56,6 @@ class LoginPage(tk.Frame):
 
     def submit(self):
         password = self.pw_entry.get()
-        print(password)
         if len(password) > 8:
             self.main.mm.create_master_hash(password)
             messagebox.showinfo(title="Success!", message="Your password has been created.")
@@ -248,14 +247,12 @@ class UpdateRemove(tk.Frame):
             
     def update_login(self):
         name = self.login["name"]
-        updated = [{'name': self.login["name"], 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_username.get()}]
+        updated = [{'name': self.login["name"], 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_pwd.get()}]
         self.main.pm.create_login(updated)
         messagebox.showinfo("Login Updated", f"Login information for {name} updated!")
         self.main.switch_frame(LandingPage)
         
     def render_self(self):
-        print(self.main.tree_selection)
-        print(self.login)
         self.grid(columnspan=5)
 
         #components
