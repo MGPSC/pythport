@@ -25,5 +25,4 @@ class BcryptEncrypt():
             bcrypt_check(attempt_scheme, bcrypt_hash)
             return True
         except ValueError:
-            print("Invalid Password!")
             return False
