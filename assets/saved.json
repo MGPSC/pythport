@@ -1,0 +1,14 @@
+{
+    "spam": {
+        "name": "spam",
+        "url": "www.spam.com",
+        "username": "KE9vV6SdgsajMbkCFf+9Amo2Tt2+Jjrhm4tQdHVhDX4=",
+        "password": "ZmKBoQqppWmjqVgckBS7G9noUfm0B0l6w4RBfxZof8Y="
+    },
+    "medium": {
+        "name": "medium",
+        "url": "medium.com",
+        "username": "Aj5WsPQIspfba6HgU1KckbVMmWRo8k2khzfHkDDjWBA=",
+        "password": "gQXBWtKqgre7zmETbjdhBoFlLlZHPXFU6o1MKroM10g="
+    }
+}
