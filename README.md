@@ -22,7 +22,13 @@
 
 ## Whiteboard Process
 
-![Pythport_whiteboard](pythport_whiteboard.png)
+### Version 1.0 
+
+![Pythport_whiteboard v.1.0](pythport_whiteboard.png)
+
+### Version 2.0
+
+![Pythport whiteboard v.2.0](pythport_whiteboard2.png)
 
 ## Attributions
 
