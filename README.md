@@ -28,7 +28,7 @@
 
 ### Version 2.0
 
-![Pythport whiteboard v.2.0](pythport_whiteboard2.png)
+![Pythport whiteboard v.2.0](pythport_v2.png)
 
 ## Attributions
 
