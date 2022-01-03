@@ -11,6 +11,12 @@ from random import randint
 #####
 
 class PythPortMain(tk.Tk):
+    """
+    Intantiates tkinter GUI components. 
+    #### METHODS
+    - `.set_main_pm(password)` - takes a string, instantiates PassManager as a self.pm.
+    - `.switch_frame(frame_class)` - takes a string, destroys frame and replaces with a new frame.
+    """
     def __init__(self):
         tk.Tk.__init__(self)
         self.window = None
@@ -23,7 +29,6 @@ class PythPortMain(tk.Tk):
         self.pm = PassManager(password)
 
     def switch_frame(self, frame_class):
-        """Destroys current frame and replaces it with a new one."""
         new_frame = frame_class(self)
         if self.window is not None:
             self.window.destroy()
@@ -41,7 +46,7 @@ class LoginPage(tk.Frame):
     #### METHODS
     
     - .submit() - ensures the newly created master password is encrypted and stored in master.json
-    - .login() - 
+    - .login() - evaluates login and redirects to LandingPage
     - .render_self() - renders 'create password' or 'log in' page dependent on whether or not a master password is stored in json.
     """
     def __init__(self, master):
@@ -51,7 +56,6 @@ class LoginPage(tk.Frame):
 
     def submit(self):
         password = self.pw_entry.get()
-        print(password)
         if len(password) > 8:
             self.main.mm.create_master_hash(password)
             messagebox.showinfo(title="Success!", message="Your password has been created.")
@@ -109,11 +113,11 @@ class LandingPage(tk.Frame):
     def render_self(self):
         self.grid(column = 0, row = 0, columnspan = 4, rowspan = 4, padx=(50, 50), pady=(10, 50))
         tv = ttk.Treeview(self)
-        tv['columns'] = ('Name', 'Username', 'Email', 'Password')
+        tv['columns'] = ('Name', 'URL', 'Email', 'Password')
         tv.heading('Name', text='Name')
         tv.column('Name', anchor='center', width=150)
-        tv.heading('Username', text='Username')
-        tv.column('Username', anchor='center', width=150)
+        tv.heading('URL', text='URL')
+        tv.column('URL', anchor='center', width=150)
         tv.heading('Email', text='Email')
         tv.column('Email', anchor='center', width=200)
         tv.heading('Password', text='Password')
@@ -224,6 +228,7 @@ class AddNewLogin(tk.Frame):
 ######
 
 class UpdateRemove(tk.Frame):
+    """Instantiates the update/remove tkinter frame."""
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.main = master
@@ -242,14 +247,12 @@ class UpdateRemove(tk.Frame):
             
     def update_login(self):
         name = self.login["name"]
-        updated = [{'name': self.login["name"], 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_username.get()}]
+        updated = [{'name': self.login["name"], 'url': self.new_url.get(), 'username': self.new_username.get(), "password": self.new_pwd.get()}]
         self.main.pm.create_login(updated)
         messagebox.showinfo("Login Updated", f"Login information for {name} updated!")
         self.main.switch_frame(LandingPage)
         
     def render_self(self):
-        print(self.main.tree_selection)
-        print(self.login)
         self.grid(columnspan=5)
 
         #components
@@ -302,6 +305,7 @@ class UpdateRemove(tk.Frame):
 ######
 
 class GenPassword(tk.Frame):
+    """Instantiates the random password generator frame in tkinter. """
     def __init__(self, master):
         tk.Frame.__init__(self, master)
     
