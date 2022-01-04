@@ -1,7 +1,7 @@
 from base64 import b64encode
 from Crypto.Hash import SHA256
 from Crypto.Protocol.KDF import bcrypt, bcrypt_check
-import sys
+
 
 class BcryptEncrypt():
     """

@@ -1,5 +1,5 @@
-from pythport.bcrypt import BcryptEncrypt
 import json
+from pythport.bcrypt import BcryptEncrypt
 
 class MasterManager():
     """
@@ -23,8 +23,4 @@ class MasterManager():
     def validate_master_pwd(self, attempt):
         master_hash = self.master_dict["master"]["hash"].encode()
         return BcryptEncrypt.validate_pwd(attempt, master_hash)
- 
-
-
-
         

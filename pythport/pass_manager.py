@@ -1,5 +1,5 @@
-from pythport.aes import AesEncrypt
 import json
+from pythport.aes import AesEncrypt
 
 class PassManager():
     """
