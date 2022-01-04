@@ -1,10 +1,9 @@
+from random import randint
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from pythport.master_manager import MasterManager
 from pythport.pass_manager import PassManager
-import json
-from random import randint
 
 #####
 ## MAIN APP LOGIC / STATE
@@ -12,7 +11,7 @@ from random import randint
 
 class PythPortMain(tk.Tk):
     """
-    Intantiates tkinter GUI components. 
+    Instantiates tkinter GUI components. 
     #### METHODS
     - `.set_main_pm(password)` - takes a string, instantiates PassManager as a self.pm.
     - `.switch_frame(frame_class)` - takes a string, destroys frame and replaces with a new frame.
@@ -60,8 +59,10 @@ class LoginPage(tk.Frame):
             self.main.mm.create_master_hash(password)
             messagebox.showinfo(title="Success!", message="Your password has been created.")
             self.main.switch_frame(LoginPage)
+            return "Success"
         else:
             messagebox.showerror(title="Oops!", message="Your password must contain at least eight (8) characters. Please enter a longer password.")
+            return "Fail"
 
     def login(self):
         password = self.pw_entry.get()
@@ -352,6 +353,7 @@ class GenPassword(tk.Frame):
 
 app = PythPortMain()
 app.eval('tk::PlaceWindow . center')
+app.resizable(False, False)
 app.mainloop()
 
 
